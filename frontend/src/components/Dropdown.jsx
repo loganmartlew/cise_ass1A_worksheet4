@@ -1,16 +1,15 @@
 import React from 'react';
-import SEPractices from '../dummydata/SEPractices';
 
-const optionItems = SEPractices.map(SEPractice => (
-  <option key={SEPractice.practice}>{SEPractice.practice}</option>
-));
-
-const Dropdown = () => {
+const Dropdown = ({ options, value, onChange, defaultText }) => {
   return (
     <div>
-      <select>
-        <option value=''>Select an SE Practice </option>
-        {optionItems}
+      <select value={value} onChange={onChange}>
+        <option value={-1}>{defaultText}</option>
+        {options.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.text}
+          </option>
+        ))}
       </select>
     </div>
   );
