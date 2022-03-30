@@ -1,11 +1,13 @@
 const SEPractices = [
   {
-    id: 1,
-    practice: 'TDD',
+    value: 1,
+    text: 'TDD',
+    regexp: /(test-?\s?driven)|(tdd)/i,
   },
   {
-    id: 2,
-    practice: 'Mob programming',
+    value: 2,
+    text: 'Mob programming',
+    regexp: /mob/i,
   },
 ];
 export default SEPractices;
