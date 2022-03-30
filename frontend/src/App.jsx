@@ -1,9 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-// import Home from './pages/Home';
-// import SEPractice from './pages/SE-Practice';
-// import SubmitArticle from './pages/Submit-Article';
-// import NotFoundPage from './pages/404';
+import {
+  Route,
+  Routes,
+  NavLink,
+  BrowserRouter as Router,
+} from 'react-router-dom';
+
+import Home from './pages/Home';
+import SEPractice from './pages/SEPractice';
+import SubmitArticle from './pages/SubmitArticle';
+// import NotFoundPage from "./pages/404";
 
 const App = () => {
   return (
@@ -12,16 +18,22 @@ const App = () => {
         <h1>Software Engineering Practice Evidence Repository (SEPER)</h1>
         <ul className='header'>
           <li>
-            <a href='/'>Home</a>
+            <NavLink to='/'>Home</NavLink>
           </li>
           <li>
-            <a href='/SEPractice'>Select the Practice</a>
+            <NavLink to='/SEPractice'>Select the Practice</NavLink>
           </li>
           <li>
-            <a href='/SubmitArticle'>Submit an Article</a>
+            <NavLink to='/SubmitArticle'>Submit an Article</NavLink>
           </li>
         </ul>
-        <div className='content'></div>
+        <div className='content'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/SEPractice' element={<SEPractice />} />
+            <Route path='/SubmitArticle' element={<SubmitArticle />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
