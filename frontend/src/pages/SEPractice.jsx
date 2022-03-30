@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import SEArticles from '../dummydata/articles';
 import Styles from '../components/TableStyle';
 import Table from '../components/EvidenceTable';
 import tablecolumns from '../components/tableColumns';
@@ -7,14 +6,21 @@ import Dropdown from '../components/Dropdown';
 import practices from '../dummydata/SEPractices';
 
 const SEPractice = () => {
-  const [articles, setArticles] = useState(SEArticles);
+  const [baseArticles, setBaseArticles] = useState([]);
+  const [articles, setArticles] = useState(baseArticles);
   const [value, setValue] = useState(-1);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/articles')
+      .then(res => res.json())
+      .then(data => setBaseArticles(data));
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line eqeqeq
     if (value == -1) {
       console.log('default');
-      setArticles(SEArticles);
+      setArticles(baseArticles);
       return;
     }
 
@@ -22,12 +28,12 @@ const SEPractice = () => {
     const practice = practices.find(practice => practice.value == value);
     console.log(practice);
 
-    const newArticles = SEArticles.filter(article =>
+    const newArticles = baseArticles.filter(article =>
       article.title.match(practice.regexp)
     );
 
     setArticles(newArticles);
-  }, [value]);
+  }, [value, baseArticles]);
 
   const handleChange = e => {
     setValue(e.target.value);
