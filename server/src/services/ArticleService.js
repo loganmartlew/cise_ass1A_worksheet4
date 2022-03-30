@@ -12,7 +12,7 @@ class ArticleService {
   getOne(id) {
     const articles = this.getAll();
 
-    return articles.find(article => article._id === id);
+    return articles.find(article => article._id == id);
   }
 
   addArticle(data) {
@@ -22,7 +22,7 @@ class ArticleService {
       ...articles,
       {
         ...data,
-        _id: articles.length,
+        _id: articles.length + 1,
       },
     ];
 
