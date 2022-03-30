@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const SubmissionForm = () => {
   const { register, handleSubmit } = useForm();
-  const [result, setResult] = useState('');
-  const onSubmit = data => setResult(JSON.stringify(data));
+  const navigate = useNavigate();
+
+  const onSubmit = data => {
+    const { title, authors, source, pubyear, doi } = data;
+    const claim = '';
+    const evidence = '';
+
+    const newArticle = {
+      title,
+      authors,
+      source,
+      pubyear,
+      doi,
+      claim,
+      evidence,
+    };
+
+    fetch('http://localhost:5000/articles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newArticle),
+    }).then(() => {
+      navigate('/SEPractice');
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input {...register('title')} placeholder='Title' />
@@ -26,7 +53,7 @@ const SubmissionForm = () => {
         <option value='TDD'>TDD</option>
         <option value='Mob Programming'>Mob Programmin</option>
       </select>
-      <p>{result}</p>
+      {/* <p>{result}</p> */}
       <input type='submit' />
     </form>
   );

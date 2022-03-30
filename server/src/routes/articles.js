@@ -31,13 +31,13 @@ const articles = () => {
     const { title, authors, source, pubyear, doi, claim, evidence } = req.body;
 
     if (
-      !title ||
-      !authors ||
-      !source ||
-      !pubyear ||
-      !doi ||
-      !claim ||
-      !evidence
+      title == null ||
+      authors == null ||
+      source == null ||
+      pubyear == null ||
+      doi == null ||
+      claim == null ||
+      evidence == null
     ) {
       return res.status(422).send('Parameter missing from request body');
     }
