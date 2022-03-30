@@ -1,6 +1,6 @@
 const db = require('../db');
 
-export default class ArticleService {
+class ArticleService {
   constructor() {
     this.db = db;
   }
@@ -15,7 +15,7 @@ export default class ArticleService {
     return articles.find(article => article._id === id);
   }
 
-  add(data) {
+  addArticle(data) {
     const articles = this.getAll();
 
     const newArticles = [
@@ -29,3 +29,5 @@ export default class ArticleService {
     db.push('/articles', newArticles);
   }
 }
+
+module.exports = ArticleService;
